@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Error Login</title>
+</head>
+<body>
+
+{{ error }}
+
+<form action="{% url 'redirector' %}">{% csrf_token %}
+<input type="submit" value="Go Back">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Read Story</title>
+</head>
+
+<form action = "{% url 'frontPage' %}">
+	<input type = "submit" value="Home">
+</form>
+
+<body>
+
+<p> <b> {{ story.title }} </b> </p>
+<p> {{ story.body }} </p>
+<p>rating : {{ story.total_votes }}</p>
+<p> author :  {{ story.author }} </p>
+
+<form action = "{% url 'changeRating' pk=story.pk value=1 %}">
+	<input type = "submit" value="Like">
+</form>
+
+<form action = "{% url 'changeRating' pk=story.pk value=-1 %}">
+	<input type = "submit" value="Dislike">
+</form>
+
+{% if request.user == story.author %}
+<form action = "{% url 'deleteStory' pk=story.pk %}">
+	<input type = "submit" value="Delete">
+</form>
+{% endif %}
+
+</body>
+
+</html>

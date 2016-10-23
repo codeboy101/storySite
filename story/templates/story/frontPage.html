@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Front Page</title>
+</head>
+
+<body>
+<p><b> Welcome {{ username }} ! </b></p>
+
+{% if not request.user.is_authenticated %}
+<form action = "{% url 'login' %}" method = "post">{% csrf_token %}
+<input type = "submit" value="Login">
+</form>
+
+<form action = "{% url 'register' %}" method = "post">{% csrf_token %}
+<input type = "submit" value = "Register">
+</form>
+{% endif %}
+
+
+{% if request.user.is_authenticated %}
+<form action = "{% url 'logout' %}" method="post">{% csrf_token %}
+<input type = "submit" value = "Logout">
+</form>
+
+<form action="{% url 'postStory' %}">
+	<input type="submit" value="Post A Story">
+</form>
+{% endif %}
+
+{% for post in posts %}
+<p> <a href="{% url 'readStory' pk=post.pk %}"> {{ post }} </a> </p>
+<br>
+{% endfor %}
+</body>
+
+</html>
