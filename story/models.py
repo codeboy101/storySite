@@ -1,10 +1,13 @@
 from django.db import models
+from django.utils import timezone
+from datetime import date
 from django.contrib.auth.models import User
 
 class Story(models.Model):
 	title = models.CharField(max_length=75)
 	body = models.TextField()
 	author = models.CharField(default="",max_length=75)
+	pub_date = models.DateTimeField(default=timezone.now)
 	total_votes = models.IntegerField(default=0)
 
 	def __str__(self):

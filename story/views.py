@@ -35,7 +35,8 @@ def readStory(request,pk):
 	story = Story.objects.get(pk=pk)
 	rating = story.total_votes
 	author = story.author
-	return render(request,"story/readStory.html",{'story':story,'rating':rating,"author":author})
+	pub_date = story.pub_date
+	return render(request,"story/readStory.html",{'story':story,'rating':rating,'author':author,'pub_date':pub_date})
 
 def frontPage(request):
 	print(request.user)
@@ -56,8 +57,6 @@ def changeRating(request,pk,value):
 		vote.save()
 
 	value = int(value)
-
-
 
 	if not vote.has_voted:
 		print("you havent voted")
