@@ -2,6 +2,8 @@ from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.views import password_change , password_change_done
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError 
@@ -9,7 +11,7 @@ from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from .models import Story , Vote
-from .forms import PostForm , LoginForm , CreateForm
+from .forms import PostForm , LoginForm , CreateForm , ResetPassForm
 
 def postStory(request):
 	form = PostForm()
@@ -90,6 +92,7 @@ def login(request):
 		if form.is_valid():
 			input_username = form.cleaned_data["username"]
 			input_pass = form.cleaned_data["password"]
+			print("input_pass is {}".format(input_pass))
 			try:
 				user = authenticate(username=input_username,password=input_pass)
 				if user is not None:
@@ -137,3 +140,14 @@ def deleteStory(request,pk):
 	story = Story.objects.get(pk=pk)
 	story.delete()
 	return redirect("frontPage")
+
+def redirectHome(request):
+	return redirect('front')
+
+def changePassword(request):
+	change_pass = password_change(request,template_name="story/resetPassword.html",password_change_form=PasswordChangeForm)
+	return change_pass
+
+def changePasswordDone(request):
+	change_pass_done = password_change_done(request,template_name="story/passwordChanged.html")
+	return change_pass_done

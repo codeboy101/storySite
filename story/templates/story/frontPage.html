@@ -8,6 +8,11 @@
 </head>
 
 <body>
+
+<form action = "{% url 'redirectHome' %}">
+	<input type="submit" value="Home">
+</form>
+
 <p><b> Welcome {{ username }} ! </b></p>
 
 {% if not request.user.is_authenticated %}
@@ -24,6 +29,10 @@
 {% if request.user.is_authenticated %}
 <form action = "{% url 'logout' %}" method="post">{% csrf_token %}
 <input type = "submit" value = "Logout">
+</form>
+
+<form action = "{% url 'changePassword' %}" method="post">{% csrf_token %}
+<input type="submit" value="Change Password">
 </form>
 
 <form action="{% url 'postStory' %}">

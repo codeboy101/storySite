@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <html>
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -10,7 +12,7 @@
 
 {{ error }}
 
-<form action="{% url 'redirector' %}">{% csrf_token %}
+<form action="{% url 'redirector' %}" method="post">{% csrf_token %}
 <input type="submit" value="Go Back">
 </form>
 

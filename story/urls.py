@@ -1,4 +1,5 @@
 from django.conf.urls import url
+#from django.contrib.auth.views import password_change , password_change_done
 from . import views
 
 urlpatterns = [
@@ -11,5 +12,7 @@ urlpatterns = [
 	url(r'^login/$',views.login,name='login'),
 	url(r'^logout/$',views.logout,name='logout'),
 	url(r'^delete/(?P<pk>\d+)/$',views.deleteStory,name='deleteStory'),
-	
+	url(r'^redirectHome/$',views.redirectHome,name='redirectHome'),
+	url(r'^changePassword/$',views.changePassword,name='changePassword'),
+	url(r'^changePasswordDone/$',views.changePasswordDone,name='password_change_done'),
 ]
